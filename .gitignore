@@ -1,0 +1,18 @@
+# Node.js 의존성 폴더
+# 이 폴더는 'npm install' 명령어로 언제든지 다시 생성할 수 있습니다.
+/node_modules
+
+# npm 실행 시 생성될 수 있는 로그 파일
+npm-debug.log*
+*.log
+
+# Tailwind CSS 빌드 결과물
+# 배포 환경에서 'npm run build'를 실행한다면 이 파일을 Git에 포함할 필요가 없습니다.
+# 직접 빌드한 CSS를 사용하려면 이 줄을 삭제하거나 주석 처리(#)하세요.
+/style.css
+
+# macOS 시스템 파일
+.DS_Store
+
+# Visual Studio Code 에디터 설정 파일
+.vscode/
