@@ -6,11 +6,6 @@
 npm-debug.log*
 *.log
 
-# Tailwind CSS 빌드 결과물
-# 배포 환경에서 'npm run build'를 실행한다면 이 파일을 Git에 포함할 필요가 없습니다.
-# 직접 빌드한 CSS를 사용하려면 이 줄을 삭제하거나 주석 처리(#)하세요.
-/style.css
-
 # macOS 시스템 파일
 .DS_Store
 
