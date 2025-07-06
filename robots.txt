@@ -1,0 +1,6 @@
+# 모든 검색 엔진 로봇에게 모든 페이지의 접근을 허용
+User-agent: *
+Allow: /
+
+# 사이트맵 파일 위치 명시
+Sitemap: https://pastediff.pages.dev/sitemap.xml

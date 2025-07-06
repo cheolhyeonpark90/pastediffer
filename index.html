@@ -3,11 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Paste & Diff - 로컬 텍스트 비교 도구</title>
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <title>Paste & Diff - 간편한 온라인 텍스트/문서 비교 도구</title>
+    <meta name="description" content="두 개의 텍스트를 붙여넣기만 하면, 빠르고 안전하게 차이점을 찾아주는 온라인 Diff 도구입니다. 문서를 서버 저장 없이 브라우저에서 바로 확인하세요.">
+    <meta name="keywords" content="텍스트 비교, 문서 비교, 문자열 비교, diff 도구, text compare, diff tool, paste and diff, 온라인 diff">
+    <link rel="canonical" href="https://pastediff.pages.dev/">
     
-    <!-- Tailwind CSS CDN은 삭제하고, 빌드된 style.css를 연결합니다. -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <link href="/style.css" rel="stylesheet">
+
+    <meta property="og:title" content="Paste & Diff - 온라인 텍스트/문서 비교 도구">
+    <meta property="og:description" content="두 텍스트의 차이점을 브라우저에서 즉시 확인하세요.">
+    <meta property="og:image" content="https://pastediff.pages.dev/og-image.png">
+    <meta property="og:url" content="https://pastediff.pages.dev/">
+    <meta property="og:type" content="website">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Paste & Diff - 온라인 텍스트/문서 비교 도구",
+      "operatingSystem": "Web Browser",
+      "applicationCategory": "UtilitiesApplication",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "description": "두 개의 텍스트나 문서를 붙여넣기만 하면, 빠르고 안전하게 차이점을 찾아주는 온라인 Diff 도구입니다.",
+      "url": "https://pastediff.pages.dev/"
+    }
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/diff@5.1.0/dist/diff.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -51,7 +77,6 @@
             <p class="text-gray-600 mt-2">서버 저장 없이, 브라우저에서 바로 두 텍스트의 차이점을 확인하세요.</p>
         </header>
 
-        <!-- 입력 섹션 -->
         <div id="input-section" class="w-full max-w-7xl bg-white p-4 md:p-6 rounded-lg shadow-md">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
@@ -70,9 +95,7 @@
             </div>
         </div>
 
-        <!-- 결과 섹션 (초기에는 숨김) -->
         <div id="result-section" class="w-full max-w-7xl mt-8 hidden">
-            <!-- 결과 헤더 -->
             <div class="bg-white p-3 rounded-t-lg shadow-md flex flex-wrap items-center justify-between gap-4">
                 <div id="stats" class="flex items-center gap-4 text-sm font-medium">
                     <span id="lines-added" class="text-green-600"></span>
@@ -80,7 +103,6 @@
                     <span id="block-changes" class="text-gray-500"></span>
                 </div>
                 <div class="flex items-center gap-3">
-                    <!-- 모드 선택 -->
                     <div id="view-mode-toggle" class="flex items-center bg-gray-100 rounded-lg p-1">
                         <button data-mode="side-by-side" class="mode-btn p-2 rounded-md" title="Side-by-Side (1)">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="18"></rect><rect x="14" y="3" width="7" height="18"></rect></svg>
@@ -93,13 +115,10 @@
                 </div>
             </div>
 
-            <!-- 결과 패널 -->
             <div id="diff-output" class="bg-white rounded-b-lg shadow-md overflow-hidden">
-                <!-- 결과가 여기에 렌더링됩니다 -->
-            </div>
+                </div>
         </div>
 
-        <!-- Disqus 댓글 섹션 -->
         <div id="disqus_thread" class="w-full max-w-7xl mt-8 bg-white p-4 md:p-6 rounded-lg shadow-md"></div>
         <script>
             /**
