@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Paste & Diff - 간편한 온라인 텍스트/문서 비교 도구</title>
-    <meta name="description" content="두 개의 텍스트를 붙여넣기만 하면, 빠르고 안전하게 차이점을 찾아주는 온라인 Diff 도구입니다. 문서를 서버 저장 없이 브라우저에서 바로 확인하세요.">
+    <meta name="description"
+        content="두 개의 텍스트를 붙여넣기만 하면, 빠르고 안전하게 차이점을 찾아주는 온라인 Diff 도구입니다. 문서를 서버 저장 없이 브라우저에서 바로 확인하세요.">
     <meta name="keywords" content="텍스트 비교, 문서 비교, 문자열 비교, diff 도구, text compare, diff tool, paste and diff, 온라인 diff">
     <link rel="canonical" href="https://pastediff.pages.dev/">
-    
+
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <link href="/style.css" rel="stylesheet">
 
@@ -39,21 +41,41 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
-    
+
     <style>
         /* 기본 폰트 및 스타일 설정 */
         body {
             font-family: 'Noto Sans KR', sans-serif;
         }
+
         /* 인라인 diff 스타일 */
-        .diff-added { background-color: rgba(16, 185, 129, 0.15); }
-        .diff-removed { background-color: rgba(239, 68, 68, 0.15); text-decoration: line-through; }
-        
+        .diff-added {
+            background-color: rgba(16, 185, 129, 0.15);
+        }
+
+        .diff-removed {
+            background-color: rgba(239, 68, 68, 0.15);
+            text-decoration: line-through;
+        }
+
         /* Side-by-side diff 라인 스타일 */
-        .diff-line-equal { background-color: transparent; }
-        .diff-line-added { background-color: rgba(22, 163, 74, 0.1); border-left: 2px solid #16a34a; }
-        .diff-line-removed { background-color: rgba(220, 38, 38, 0.1); border-left: 2px solid #dc2626; }
-        .diff-line-placeholder { background-color: rgba(107, 114, 128, 0.05); }
+        .diff-line-equal {
+            background-color: transparent;
+        }
+
+        .diff-line-added {
+            background-color: rgba(22, 163, 74, 0.1);
+            border-left: 2px solid #16a34a;
+        }
+
+        .diff-line-removed {
+            background-color: rgba(220, 38, 38, 0.1);
+            border-left: 2px solid #dc2626;
+        }
+
+        .diff-line-placeholder {
+            background-color: rgba(107, 114, 128, 0.05);
+        }
 
         /* 글자 단위 diff 스타일 (더 강한 하이라이트) */
         .char-added {
@@ -61,17 +83,29 @@
             border-radius: 3px;
             font-weight: 600;
         }
+
         .char-removed {
             background-color: rgba(239, 68, 68, 0.4);
             border-radius: 3px;
             font-weight: 600;
         }
     </style>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZKEVE09ZFL"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-ZKEVE09ZFL');
+    </script>
 </head>
+
 <body class="bg-gray-100 text-gray-800 transition-colors duration-300">
 
     <div id="app" class="min-h-screen flex flex-col items-center p-4 md:p-8">
-        
+
         <header class="w-full max-w-7xl mb-6 text-center">
             <h1 class="text-3xl md:text-4xl font-bold text-gray-900">Paste & Diff</h1>
             <p class="text-gray-600 mt-2">서버 저장 없이, 브라우저에서 바로 두 텍스트의 차이점을 확인하세요.</p>
@@ -81,15 +115,20 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                     <label for="text-a" class="block text-sm font-medium mb-2">이전 (원본)</label>
-                    <textarea id="text-a" rows="10" class="w-full p-3 bg-gray-50 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition" placeholder="이곳에 원본 텍스트를 붙여넣으세요."></textarea>
+                    <textarea id="text-a" rows="10"
+                        class="w-full p-3 bg-gray-50 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+                        placeholder="이곳에 원본 텍스트를 붙여넣으세요."></textarea>
                 </div>
                 <div>
                     <label for="text-b" class="block text-sm font-medium mb-2">수정 (새 버전)</label>
-                    <textarea id="text-b" rows="10" class="w-full p-3 bg-gray-50 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition" placeholder="이곳에 비교할 텍스트를 붙여넣으세요."></textarea>
+                    <textarea id="text-b" rows="10"
+                        class="w-full p-3 bg-gray-50 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+                        placeholder="이곳에 비교할 텍스트를 붙여넣으세요."></textarea>
                 </div>
             </div>
             <div class="mt-6 flex justify-center">
-                <button id="compare-btn" class="px-8 py-3 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300 transition-transform transform hover:scale-105">
+                <button id="compare-btn"
+                    class="px-8 py-3 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300 transition-transform transform hover:scale-105">
                     비교하기 (Ctrl+Enter)
                 </button>
             </div>
@@ -105,18 +144,29 @@
                 <div class="flex items-center gap-3">
                     <div id="view-mode-toggle" class="flex items-center bg-gray-100 rounded-lg p-1">
                         <button data-mode="side-by-side" class="mode-btn p-2 rounded-md" title="Side-by-Side (1)">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="18"></rect><rect x="14" y="3" width="7" height="18"></rect></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <rect x="3" y="3" width="7" height="18"></rect>
+                                <rect x="14" y="3" width="7" height="18"></rect>
+                            </svg>
                         </button>
                         <button data-mode="inline" class="mode-btn p-2 rounded-md" title="Inline (2)">
-                           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                <line x1="8" y1="12" x2="16" y2="12"></line>
+                            </svg>
                         </button>
                     </div>
-                    <button id="reset-btn" class="px-4 py-2 bg-gray-200 text-sm font-medium rounded-lg hover:bg-gray-300">다시 비교</button>
+                    <button id="reset-btn"
+                        class="px-4 py-2 bg-gray-200 text-sm font-medium rounded-lg hover:bg-gray-300">다시 비교</button>
                 </div>
             </div>
 
             <div id="diff-output" class="bg-white rounded-b-lg shadow-md overflow-hidden">
-                </div>
+            </div>
         </div>
 
         <div id="disqus_thread" class="w-full max-w-7xl mt-8 bg-white p-4 md:p-6 rounded-lg shadow-md"></div>
@@ -130,15 +180,16 @@
             this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
             };
             */
-            (function() { // DON'T EDIT BELOW THIS LINE
-            var d = document, s = d.createElement('script');
-            s.src = 'https://pastediff.disqus.com/embed.js';
-            s.setAttribute('data-timestamp', +new Date());
-            (d.head || d.body).appendChild(s);
+            (function () { // DON'T EDIT BELOW THIS LINE
+                var d = document, s = d.createElement('script');
+                s.src = 'https://pastediff.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
             })();
         </script>
-        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-        
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by
+                Disqus.</a></noscript>
+
         <footer class="w-full max-w-7xl mt-8 text-center text-sm text-gray-500">
             <p>Paste & Diff &copy; 2024. 모든 비교는 당신의 브라우저에서만 안전하게 처리됩니다.</p>
         </footer>
@@ -146,4 +197,5 @@
 
     <script src="app.js" defer></script>
 </body>
+
 </html>
